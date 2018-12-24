@@ -17,12 +17,20 @@ regressor=lm(formula = y~x,data = training_set)
 #Predicting the test set
 y_pred =predict(regressor,newdata = test_set)
 
-#visualizing the Training DAta
-install.packages("ggplot2")
+#visualizing the Training Data
+#install.packages("ggplot2")
 library("ggplot2")
 ggplot()+
   geom_point(aes(x=training_set$x,y=training_set$y),colour="red")+
-  goem_line(aes(x=training_set$x,y=predict(regressor,newdata = training_set)),colour="blue")+
+  geom_line(aes(x=training_set$x,y=predict(regressor,newdata = training_set)),colour="blue")+
   ggtitle('Fire vs theft in chicago(Training set)')+
+  xlab('Fires(per 1000 housing units)')+
+  ylab('Thefts(per 1000 population)')
+
+#visualizing test data
+ggplot()+
+  geom_point(aes(x=test_set$x,y=test_set$y),colour="red")+
+  geom_line(aes(x=training_set$x,y=predict(regressor,newdata = training_set)),colour="blue")+
+  ggtitle('Fire vs theft in chicago(Test set)')+
   xlab('Fires(per 1000 housing units)')+
   ylab('Thefts(per 1000 population)')
